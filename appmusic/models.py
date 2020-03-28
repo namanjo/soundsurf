@@ -12,7 +12,7 @@ class Album(models.Model):
         return self.album_name
 
 class Songs(models.Model):
-    album = models.ForeignKey(Album, on_delete=models.CASCADE)
+    album = models.ForeignKey(Album, on_delete=models.CASCADE, related_name='songs')
     song_title = models.CharField(max_length = 100, unique=True)
     song = models.FileField(upload_to='songs')
 

@@ -17,7 +17,7 @@
           <h5 class="card-title">{{ album.album_name }}</h5>
           <h6 class="card-subtitle mb-2 text-muted">{{ album.genre }}</h6>
           <p class="card-text"></p>
-          <a href="#" class="btn btn-primary">View Album</a>
+          <a href="{% url 'album_detail' album_id=album.pk %}" class="btn btn-primary">View Album</a>
         </div>
       </div>
     </div>

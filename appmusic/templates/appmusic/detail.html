@@ -1,0 +1,23 @@
+{% extends 'appmusic/base.html' %}
+
+{% block title_block %}AlbumDetail{% endblock %}
+
+{% block body_block %}
+
+  <div class="jumbotron">
+    <h2>{{ album.album_name }}</h2>
+    <p>{{ album.album_artist }}</p>
+    <p>{{ album.genre }}</p>
+    <a href="#" class="btn btn-success">Add Song</a>
+  </div>
+
+  <img src="{{ album.cover_pic.url }}" alt="Album-cover">
+
+  {% for song_obj in album.songs.all %}
+    <div class="small-card">
+      <h3>{{ song_obj.song_title }}</h3>
+      <a href="{{ song_obj.song.url }}" class="btn btn-primary">Play</a>
+    </div>
+  {% endfor %}
+
+{% endblock %}
