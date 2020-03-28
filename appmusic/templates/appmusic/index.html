@@ -1,0 +1,40 @@
+{% extends 'appmusic/base.html' %}
+{% block title_block %}SoundSurf{% endblock %}
+
+{% block body_block %}
+
+  <div class="jumbotron">
+    <h2>SoundSurf</h2>
+    <p>Where Music Meets Ocean.</p>
+  </div>
+
+  <div class="row">
+    {% for album in albums %}
+    <div class="col-md-4 col-sm-6">
+      <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="{{ album.cover_pic.url }}" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">{{ album.album_name }}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">{{ album.genre }}</h6>
+          <p class="card-text"></p>
+          <a href="#" class="btn btn-primary">View Album</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+
+{% endblock %}
+
+  <!-- <div class="row">
+    <div class="col-md-4 col-sm-6">
+      <img class="img-thumbnail" src="https://images.unsplash.com/photo-1507992781348-310259076fe0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" alt="image">
+    </div>
+    <div class="col-md-4 col-sm-6">
+      <img class="img-thumbnail" src="https://images.unsplash.com/photo-1525577288853-c6f0a020a162?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" alt="image">
+    </div>
+    <div class="col-md-4 col-sm-6">
+      <img class="img-thumbnail" src="https://images.unsplash.com/photo-1452392450884-d5fd51464e09?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" alt="image">
+    </div>
+  </div> -->
