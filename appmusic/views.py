@@ -36,6 +36,8 @@ def album_create(request):
     return render(request, 'appmusic/create_album.html', {'form': form})
 
 
+FILE_TYPE = ['mp3', 'wav']
+
 @login_required
 def add_song(request, album_id):
     album = get_object_or_404(Album, pk=album_id)
@@ -45,7 +47,14 @@ def add_song(request, album_id):
         if form.is_valid():
             song_obj = form.save(commit=False)
             song_obj.album = album
+
             song_obj.song = request.FILES['song']
+            file_type = song_obj.song.url.split('.')[-1]
+            file_type = file_type.lower()
+            if file_type not in FILE_TYPE:
+                context={'form': form, "error_message": "File Format should be 'mp3' or 'wav'"}
+                return render(request, 'appmusic/add_song.html', context)
+
             song_obj.save()
             return redirect('album_detail', album_id=album_id)
     else:
