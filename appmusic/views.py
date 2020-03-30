@@ -53,6 +53,21 @@ def add_song(request, album_id):
     return render(request, 'appmusic/add_song.html', {'form': form})
 
 
+@login_required
+def album_delete(request, album_id):
+    album = Album.objects.get(pk=album_id)
+    album.delete()
+    return redirect('index')
+
+
+@login_required
+def song_delete(request, song_id):
+    song = Songs.objects.get(pk = song_id)
+    album_id = song.album.id
+    song.delete()
+    return redirect('album_detail', album_id=album_id)
+
+
 def login_view(request):
     if request.method == "POST":
         username = request.POST.get('username')

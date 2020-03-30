@@ -8,7 +8,11 @@
     <h2>{{ album.album_name }}</h2>
     <p>{{ album.album_artist }}</p>
     <p>{{ album.genre }}</p>
-    <a href="{% url 'add_song' album_id=album.id %}" class="btn btn-success">Add Song</a>
+
+    {% if user.is_authenticated %}
+      <a href="{% url 'add_song' album_id=album.id %}" class="btn btn-success">Add Song</a>
+    {% endif %}
+    
   </div>
 
   <img src="{{ album.cover_pic.url }}" alt="Album-cover">
@@ -17,6 +21,9 @@
     <div class="small-card">
       <h3>{{ song_obj.song_title }}</h3>
       <a href="{{ song_obj.song.url }}" class="btn btn-primary">Play</a>
+      {% if user.is_authenticated %}
+        <a href="{% url 'song_delete' song_id=song_obj.pk %}" class="btn btn-danger">Delete</a>
+      {% endif %}
     </div>
   {% endfor %}
 
