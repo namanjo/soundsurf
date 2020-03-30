@@ -8,7 +8,7 @@
     <h2>{{ album.album_name }}</h2>
     <p>{{ album.album_artist }}</p>
     <p>{{ album.genre }}</p>
-    <a href="#" class="btn btn-success">Add Song</a>
+    <a href="{% url 'add_song' album_id=album.id %}" class="btn btn-success">Add Song</a>
   </div>
 
   <img src="{{ album.cover_pic.url }}" alt="Album-cover">

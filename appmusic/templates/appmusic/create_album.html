@@ -1,0 +1,22 @@
+{% extends 'appmusic/base.html' %}
+
+{% block title_block %}AlbumCreate{% endblock %}
+
+{% block body_block %}
+  <div class="jumbotron">
+    <h2>Create New Album</h2>
+  </div>
+
+  <div class="panel">
+    <form enctype="multipart/form-data" method="POST" >
+      {{ form.as_p }}
+      {% csrf_token %}
+
+      <input type="submit" class="btn btn-primary" value="Create">
+      {% if form.errors %}
+        <p class="error-msg">{{ form.errors }}</p>
+      {% endif %}
+    </form>
+  </div>
+
+{% endblock %}

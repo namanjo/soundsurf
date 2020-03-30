@@ -11,3 +11,15 @@
   margin: 20px 0;
   border-bottom: 5px solid #555;
 }
+
+.panel{
+  max-width: 80%;
+  padding: 20px;
+  background-color: #EDEDED;
+  border-radius: 20px;
+}
+
+.error-msg{
+  font-size: 14px;
+  color: red;
+}

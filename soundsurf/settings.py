@@ -129,3 +129,5 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/appmusic/media/'
 MEDIA_ROOT = MEDIA_DIR
+
+LOGIN_URL = '/login/'

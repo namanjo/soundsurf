@@ -3,10 +3,10 @@ from django.contrib.auth.models import User
 
 class Album(models.Model):
     author = models.ForeignKey(User, on_delete = models.CASCADE)
-    album_artist = models.CharField(max_length = 100)
     album_name = models.CharField(max_length = 100, unique=True)
-    cover_pic = models.ImageField(upload_to = 'album_covers')
-    genre = models.CharField(max_length = 50)
+    album_artist = models.CharField(max_length = 100)
+    genre = models.CharField(max_length = 100)
+    cover_pic = models.ImageField(upload_to='album_covers')
 
     def __str__(self):
         return self.album_name

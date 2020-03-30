@@ -1,5 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from appmusic.models import Album, Songs
+from appmusic.forms import AlbumForm, AddSongForm
+
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login, logout
 
 
 def index(request):
@@ -14,3 +18,63 @@ def about(request):
 def detail(request, album_id):
     album = get_object_or_404(Album, pk=album_id)
     return render(request, 'appmusic/detail.html', {'album': album})
+
+
+@login_required
+def album_create(request):
+    if request.method == "POST":
+        form = AlbumForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            album = form.save(commit=False)
+            album.author = request.user
+            album.cover_pic = request.FILES['cover_pic']
+            album.save()
+            return redirect('album_detail', album_id = album.pk)
+    else:
+        form = AlbumForm()
+    return render(request, 'appmusic/create_album.html', {'form': form})
+
+
+@login_required
+def add_song(request, album_id):
+    album = get_object_or_404(Album, pk=album_id)
+
+    if request.method == "POST":
+        form = AddSongForm(request.POST, request.FILES)
+        if form.is_valid():
+            song_obj = form.save(commit=False)
+            song_obj.album = album
+            song_obj.song = request.FILES['song']
+            song_obj.save()
+            return redirect('album_detail', album_id=album_id)
+    else:
+        form = AddSongForm()
+    return render(request, 'appmusic/add_song.html', {'form': form})
+
+
+def login_view(request):
+    if request.method == "POST":
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(username = username, password=password)
+        if user:
+            if user.is_active:
+                login(request, user)
+                if 'next' in request.POST:
+                    return redirect(request.POST.get('next'))
+                else:
+                    return redirect('index')
+            else:
+                return render(request, 'appmusic/login.html', {'error_message':'Account has been temporarily disabled.'})
+        else:
+            return render(request, 'appmusic/login.html', {'error_message': 'Invalid User Login'})
+    else:
+        return render(request, 'appmusic/login.html')
+
+
+@login_required
+def logout_view(request):
+    logout(request)
+    return redirect('index')
