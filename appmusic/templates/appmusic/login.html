@@ -4,33 +4,50 @@
 
 {% block body_block %}
 
-  <div class="jumbotron">
-    <h2>Login</h2>
-  </div>
+  <section class="section-form">
+    <div class="container">
+      <h2>Login</h2>
 
-<div class="panel">
-  <form method="POST">
-    <div class="form-group">
-      <label for="InputUsername">Username:</label>
-      <input type="text" name="username" class="form-control" id="InputUsername" placeholder="Enter Username">
+      <form class="contact-form panel" method="POST">
+        {% csrf_token %}
+
+        <div class="row">
+          <div class="col-sm-4">
+            <label for="name">Username</label>
+          </div>
+          <div class="col-sm-8">
+            <input type="text" name="username" placeholder="Enter Username" required>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-4">
+            <label for="email">Password</label>
+          </div>
+          <div class="col-sm-8">
+            <input type="password" name="password" placeholder="Password" required>
+          </div>
+        </div>
+
+        {% if request.GET.next %}
+          <input type="hidden" name="next" value="{{ request.GET.next }}">
+        {% endif %}
+
+        {% if error_message %}
+          <p class="error-msg">{{ error_message }}</p>
+        {% endif %}
+
+        <div class="row">
+          <!-- <div class="col-sm-4">
+            <label>&nbsp</label>
+          </div> -->
+          <div class="col-sm-8">
+            <input type="submit" value="Submit">
+          </div>
+        </div>
+
+      </form>
     </div>
-    <div class="form-group">
-      <label for="InputPassword">Password:</label>
-      <input type="password" name="password" class="form-control" id="InputPassword" placeholder="Password">
-      <small class="form-text text-muted">We'll never share your data with anyone else.</small>
-    </div>
-    {% csrf_token %}
-
-    {% if request.GET.next %}
-      <input type="hidden" name="next" value="{{ request.GET.next }}">
-    {% endif %}
-
-    {% if error_message %}
-      <p class="error-msg">{{ error_message }}</p>
-    {% endif %}
-
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
-</div>
+  </section>
 
 {% endblock %}

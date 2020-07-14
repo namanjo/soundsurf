@@ -1,0 +1,15 @@
+{% for field in form %}
+
+<div class="row">
+  <div class="col-sm-4">
+    <label for="name">{{ field.label_tag }}</label>
+  </div>
+  <div class="col-sm-8">
+    {{ field }}
+    <span>{{ field.errors }}</span>
+  </div>
+
+</div>
+
+
+{% endfor %}

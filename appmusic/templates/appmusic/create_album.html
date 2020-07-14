@@ -3,20 +3,23 @@
 {% block title_block %}AlbumCreate{% endblock %}
 
 {% block body_block %}
-  <div class="jumbotron">
+
+  <section class="container">
     <h2>Create New Album</h2>
-  </div>
+      <form class="contact-form panel" enctype="multipart/form-data" method="POST">
+        {% csrf_token %}
 
-  <div class="panel">
-    <form enctype="multipart/form-data" method="POST" >
-      {{ form.as_p }}
-      {% csrf_token %}
+        {% include 'appmusic/form_template.html' %}
 
-      <input type="submit" class="btn btn-primary" value="Create">
-      {% if form.errors %}
-        <p class="error-msg">{{ form.errors }}</p>
-      {% endif %}
-    </form>
-  </div>
+        <div class="row">
+          <div class="col-sm-4">
+            <label>&nbsp</label>
+          </div>
+          <div class="col-sm-8">
+            <input type="submit" value="Submit">
+          </div>
+        </div>
+      </form>
+  </section>
 
 {% endblock %}

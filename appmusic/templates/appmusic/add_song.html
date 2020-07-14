@@ -3,22 +3,22 @@
 {% block title_block %}Add Song{% endblock %}
 
 {% block body_block %}
-  <div class="jumbotron">
+  <section class="container">
     <h2>Add a new song</h2>
-  </div>
-
-  <div class="panel">
-    <form method="POST" enctype="multipart/form-data">
-      {{ form.as_p }}
+    <form class="contact-form panel" enctype="multipart/form-data" method="POST">
       {% csrf_token %}
 
-      {% if error_message %}
-        <p class="error-msg">{{ error_message }}</p>
-      {% endif %}
+      {% include 'appmusic/form_template.html' %}
 
-      <input type="submit" class="btn btn-primary" value="Create">
-
+      <div class="row">
+        <div class="col-sm-4">
+          <label>&nbsp</label>
+        </div>
+        <div class="col-sm-8">
+          <input type="submit" value="Save">
+        </div>
+      </div>
     </form>
-  </div>
+  </section>
 
 {% endblock %}

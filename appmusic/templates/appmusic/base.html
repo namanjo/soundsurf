@@ -1,60 +1,75 @@
 <!DOCTYPE html>
-{% load staticfiles %}
+{% load static %}
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title_block %}{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'icons/ionicons.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/bootstrap-grid.css' %}">
-    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Barlow+Condensed|Lato:100,300,300i,400&display=swap" rel="stylesheet">
   </head>
   <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div class="container">
-        <a class="navbar-brand" href="{% url 'index' %}">SoundSurf</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarText">
-        <ul class="navbar-nav mr-auto">
+    <div class="wrapper">
+    <header>
+      <nav>
+        <ul class="container">
+          <li><a href="{% url 'index' %}">SoundSurf</a></li>
+          <li><a href="{% url 'all_albums_songs' 'albums' %}">Albums</a></li>
+          <li><a href="{% url 'all_albums_songs' 'songs' %}">Songs</a></li>
+          <li><a href="{% url 'about' %}">About</a></li>
 
-          {% if user.is_authenticated %}
-            <li class="nav-item active">
-              <a class="nav-link">Welcome: {{ user.username }}<span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="{% url 'album_create' %}">Add Album</a>
-            </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-            </li>
+          {% if request.user.is_authenticated %}
+            <li><a href="{% url 'album_create' %}">Add Album</a></li>
+
+            <div class="nav-right">
+              <li><p style="color:#e1e3f2">
+                <i class="ion-android-person"></i>{{ user.username }}</p>
+              </li>
+
+              <li><a href="{% url 'logout' %}">Logout</a></li>
+            </div>
 
           {% else %}
-            <li class="nav-item active">
-              <a class="nav-link" href="{% url 'about' %}">About</a>
-            </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="{% url 'login' %}">Login</a>
-            </li>
+            <div class="nav-right">
+              <li><a href="{% url 'login' %}"><i class="ion-android-unlock"></i>Login</a></li>
+            </div>
           {% endif %}
 
         </ul>
-      </div>
-      </div>
-    </nav>
+      </nav>
+    </header>
 
-    <br>
+    {% block body_block %}
 
-
-    <div class="container">
-      {% block body_block %}
-
-      {% endblock %}
+    {% endblock %}
+    <div class="push"></div>
     </div>
+
+    <footer>
+      <div class="container clearfix">
+          <ul class="footer-nav clearfix">
+            <li><a href="#">About us</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Press</a></li>
+            <li><a href="#">Android App</a></li>
+          </ul>
+
+
+          <ul class="social-links clearfix">
+            <li><a href="#"><i class="ion-social-facebook"></i></a></li>
+            <li><a href="#"><i class="ion-social-twitter"></i></a></li>
+            <li><a href="#"><i class="ion-social-googleplus"></i></a></li>
+            <li><a href="#"><i class="ion-social-instagram"></i></a></li>
+          </ul>
+      </div>
+
+      <div class="container">
+        <p>Copyright &copy; 2020 by SoundSurf. All rights reserved.</p>
+      </div>
+    </footer>
 
 
   </body>

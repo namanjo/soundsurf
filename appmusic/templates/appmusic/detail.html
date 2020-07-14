@@ -4,27 +4,55 @@
 
 {% block body_block %}
 
-  <div class="jumbotron">
-    <h2>{{ album.album_name }}</h2>
-    <p>{{ album.album_artist }}</p>
-    <p>{{ album.genre }}</p>
+  <section class="container clearfix">
 
-    {% if user.is_authenticated %}
-      <a href="{% url 'add_song' album_id=album.id %}" class="btn btn-success">Add Song</a>
-    {% endif %}
-    
-  </div>
-
-  <img src="{{ album.cover_pic.url }}" alt="Album-cover">
-
-  {% for song_obj in album.songs.all %}
-    <div class="small-card">
-      <h3>{{ song_obj.song_title }}</h3>
-      <a href="{{ song_obj.song.url }}" class="btn btn-primary">Play</a>
-      {% if user.is_authenticated %}
-        <a href="{% url 'song_delete' song_id=song_obj.pk %}" class="btn btn-danger">Delete</a>
-      {% endif %}
+    <!-- Left Side -->
+    <div class="card-big">
+        <img src="{{ album.cover_pic.url }}"style="width:100%; height:100%;" alt="Album Cover">
+        <div class="card-text">
+          <h3>{{ album.album_name }}</h3>
+          <p>{{ album.genre }}</p>
+          <p>{{ album.album_artist }}</p>
+      </div>
     </div>
-  {% endfor %}
+
+
+    <!-- Right Side -->
+    <div class="songs-content">
+      {% if request.user == album.author %}
+        <h5>Add more Songs: <span><a href="{% url 'add_song' album_id=album.id %}" class="btn btn-primary">Add</a></span></h5>
+      {% endif %}
+
+        <table class="detail-table">
+          <thead>
+            <tr>
+              <th>Song Title</th>
+              <th>Artist</th>
+              <th>Song</th>
+              {% if request.user == album.author %}
+                <th>Action</th>
+              {% endif %}
+            </tr>
+          </thead>
+
+          <tbody>
+            {% for song_obj in album.songs.all %}
+              <tr>
+                <td>{{ song_obj.song_title }}</td>
+                <td>{{ song_obj.album.album_artist }}</td>
+                <td><a href="{{ song_obj.song.url }}" class="btn btn-success">Play</a></td>
+
+                {% if request.user == album.author %}
+                  <td><a href="{% url 'song_delete' song_id=song_obj.pk %}" class="btn btn-dark"><i class="ion-ios-trash"></a></td>
+                {% endif %}
+
+              </tr>
+            {% endfor %}
+          </tbody>
+
+        </table>
+      </div>
+
+  </section>
 
 {% endblock %}
