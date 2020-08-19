@@ -4,13 +4,12 @@
   box-sizing: border-box;
 }
 
-
 html, body{
   font-family: 'Lato', 'Arial', sans-serif;
   font-size: 20px;
   font-weight: 300;
   text-rendering: optimizeLegibility;
-  height: 100%;
+  overflow-x: hidden;
 }
 
 .clearfix{zoom:1}
@@ -22,17 +21,15 @@ html, body{
   visibility: hidden;
 }
 
+section{
+  padding: 60px 0;
+}
+
 .container{
   max-width: 1140px;
   margin: 0 auto;
 }
 
-.container-fluid {
-  max-width: 100%;
-  padding: 0 30px;
-  margin-right: auto;
-  margin-left: auto;
-}
 
 /******Headings******/
 h2,
@@ -52,26 +49,29 @@ h1{
 h2{
   font-size: 180%;
   word-spacing: 2px;
-  margin: 0 0 20px 0;
+  margin: 0 0 1em 0;
+  text-align: center;
 }
 
 h3{
   font-size: 150%;
   word-spacing: 2px;
-
 }
 
-section{
-  padding: 40px 0;
+.content-para{
+  margin-bottom: 2em;
+  line-height: 1.4;
+  letter-spacing: 1.5px;
+  text-align: justify;
 }
 
-/******Header******/
+/******Header Section******/
 .background{
   position: relative;
   background-image: linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.3)),url(pics/music.jpg);
   height: 60vh;
   background-size: cover;
-  background-position: top;
+  background-position: center;
   background-attachment: fixed;
 }
 
@@ -84,26 +84,105 @@ section{
   color: #fff;
 }
 
-.content-para{
-  margin-bottom: 20px;
-  line-height: 1.4;
-  text-align: justify;
+.header-text p{
+  margin-bottom: 15px;
+  letter-spacing:4px;
 }
 
-.bg-para{
-  line-height: 1.4;
-  text-align: justify;
-  background: #fff;
-  padding: 20px;
-  border-radius: 15px;
+.header-text a:first-of-type{
+  margin-right: 10px;
 }
 
 .header-text h1{
   color: #fff;
 }
 
-/*****INPUT TYPES*****/
+.album-song-pic{
+  width: 20px;
+  max-height: 15px;
+  margin-right: 5px;
+}
 
+/*****Main Navbar*****/
+nav{
+  background: #202020;
+}
+
+.main-nav i{
+  margin-right: 7px;
+}
+
+.thug-life{
+  float: left;
+}
+
+.nav-right{
+  float: right;
+}
+
+.main-nav{
+  list-style: none;
+}
+
+.main-nav li{
+  display: inline-block;
+}
+
+a{
+  text-decoration: none;
+  color: #000;
+}
+
+.main-nav li a:link,
+.main-nav li a:visited{
+  color: #e1e3f2;
+  font-size: 1.2em;
+  display: block;
+  padding: .7em;
+  transition: all .3s;
+}
+
+.main-nav li a:hover,
+.main-nav li a:active{
+  background: #f1f1f1;
+  color: #000;
+}
+
+/*******Sticky Navigation********/
+.sticky{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(32, 32, 32, 0.96);
+  box-shadow: 0 2px 2px #555;
+  z-index: 9999;
+}
+
+.sticky .main-nav li a:link,
+.sticky .main-nav li a:visited{
+
+}
+
+.sticky .main-nav li a:hover,
+.sticky .main-nav li a:active{
+
+}
+
+/******Mobile Navigation******/
+.mobile-nav-icon{
+  float: right;
+  cursor: pointer;
+  display: none;
+  margin:.7em .7em 0 0;
+}
+
+.mobile-nav-icon i{
+  font-size: 200%;
+  color: #fff;
+}
+
+/*****INPUT TYPES*****/
 input[type=text],
 input[type=email],
 input[type=password]{
@@ -129,10 +208,8 @@ input[type=file]{
   width: 25%;
 }
 
-.header-text input[type=submit],
-.contact-form input[type=submit]{
+.header-text input[type=submit]{
   display: inline-block;
-  text-decoration: none;
   font-size: .8em;
   padding: .5em;
   border-radius: .4em;
@@ -143,60 +220,17 @@ input[type=file]{
 }
 
 
-/*****Navbar*****/
-nav{
-  background: #202020;
-}
-
-nav i{
-  margin-right: 7px;
-}
-
-.nav-right{
-  float: right;
-}
-
-nav ul{
-  list-style: none;
-}
-
-nav li{
-  display: inline-block;
-}
-
-a{
-  text-decoration: none;
-  color: #000;
-}
-
-nav li a{
-  color: #e1e3f2;
-  font-size: 1.2em;
-  display: block;
-  padding: .7em;
-  transition: all .3s;
-}
-
-nav li a:hover,
-nav li a:active{
-  background: #f1f1f1;
-  color: #000;
-}
-
-
 /*****Buttons*****/
 .btn{
   display: inline-block;
   text-decoration: none;
-  padding: 0.375rem 0.75rem;
+  padding: 0.35em 0.7em;
   border-radius: .3em;
   transition: background-color .3s;
-  font-weight: 400;
 }
 
 .btn-primary {
   color: #fff;
-  padding: 0.375rem 0.75rem;
   background-color: #007bff;
   border-color: #007bff;
   border-radius: .3em;
@@ -243,6 +277,7 @@ nav li a:active{
   background-color: #f6f6f6;
   color: #000;
   border-radius: 1em;
+  padding: .5em 1em;
 }
 
 .btn-light:hover,
@@ -259,24 +294,111 @@ nav li a:active{
   height: 280px;
   width: 20%;
   margin: 1em 2.5%;
+  border-radius: 4%;
+}
+
+.card img{
+  width: 100%;
+  height: 60%;
+  border-radius: 4%;
 }
 
 .card-text{
   margin: 0 10px;
-  line-height: 1.2;
 }
 
 .card-big{
   background: #f9f9f9;
   float: left;
-  /* height: 280px; */
   width: 30%;
-  /* margin: 1em 2.5%; */
 }
 
 .card-big .card-text{
-  padding: 10px 0;
+  padding: 5px;
 }
+
+
+/******Section About******/
+.section-2{
+  padding: 0;
+}
+
+.partation{
+  height: 90vh;
+  width: 50%;
+  float: left;
+}
+
+.area-1{
+  background-color: #111415;
+  color: #fff;
+  position: relative;
+}
+
+.work-steps{
+  margin-bottom: 40px;
+}
+
+.work-steps:last-of-type{
+  margin-bottom: 60px;
+}
+
+.work-steps div{
+  border: 1px solid #fff;
+  display: inline-block;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  text-align: center;
+  padding: 5px;
+  float: left;
+  font-size: 150%;
+  margin-right: 20px;
+}
+
+.area-2{
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6),rgba(0, 0, 0, 0.6)),url(pics/stage_show.jpg);
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+  position: relative;
+}
+
+.join-site{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 1em 2em;
+}
+
+
+blockquote{
+  padding: 1%;
+  text-align: justify;
+  font-style: italic;
+  line-height: 145%;
+}
+
+cite{
+  font-size: 90%;
+  display: block;
+  margin-left: 1em;
+  margin-bottom: 2em;
+}
+
+blockquote::before{
+  content: "\201C";
+  font-size: 300%;
+  display: block;
+}
+
+cite img{
+  height: 60px;
+  border-radius: 50%;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
 
 /******Table******/
 table{
@@ -304,37 +426,11 @@ td{
   margin: 0;
 }
 
-/******Section 2******/
-.section-2{
-  padding: 0;
-}
-
-.partation{
-  height: 100vh;
-  width: 50%;
-  float: left;
-  /* padding: 10px; */
-}
-
-.area-1{
-  background-image: linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.3)),url(pics/stage_show.jpg);
-  background-size: cover;
-  background-position: center;
-  color: #fff;
-}
-
-.area-2{
-  background-color: #111;
-  color: #fff;
-  padding: 2em;
-}
-
 
 /******Login & Signup Forms******/
 
 .contact-form{
   width: 100%;
-  /* margin: 0 auto; */
 }
 
 .contact-form input[type=text],
@@ -348,7 +444,6 @@ td{
   width: 90%;
 }
 
-
 .contact-form input[type=submit]{
   display: block;
   background-color: #2e2e2e;
@@ -357,6 +452,9 @@ td{
   border: 2px solid #2e2e2e;
   border-radius: 20px;
   font-weight: 300;
+  cursor: pointer;
+  outline: 0;
+  transition: background-color .3s;
 }
 
 .contact-form input[type=submit]:hover,
@@ -378,7 +476,7 @@ footer{
 
 .wrapper{
   min-height: 100%;
-  margin: 0 auto -60px;
+  margin: 0 auto -30px;
 }
 
 .footer-nav{
@@ -443,8 +541,8 @@ footer p{
 }
 
 .error-msg{
-  font-size: 20px;
-  margin-bottom: 10px;
+  font-size: 1em;
+  margin-bottom: .5em;
   color: red;
 }
 
@@ -455,7 +553,7 @@ footer p{
 .errorlist{
   font-size: 16px;
   color: red;
-  margin-bottom: 20px;
+  margin-bottom: 1em;
   line-height: 1;
 }
 

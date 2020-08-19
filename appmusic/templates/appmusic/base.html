@@ -15,30 +15,32 @@
     <div class="wrapper">
     <header>
       <nav>
-        <ul class="container">
-          <li><a href="{% url 'index' %}">SoundSurf</a></li>
-          <li><a href="{% url 'all_albums_songs' 'albums' %}">Albums</a></li>
-          <li><a href="{% url 'all_albums_songs' 'songs' %}">Songs</a></li>
-          <li><a href="{% url 'about' %}">About</a></li>
+        <div class="container clearfix">
+          <ul class="main-nav js--main-nav">
+            <li><a href="{% url 'index' %}">SoundSurf</a></li>
+            <li><a href="{% url 'all_albums_songs' 'albums' %}">Albums</a></li>
+            <li><a href="{% url 'all_albums_songs' 'songs' %}">Songs</a></li>
+            <li><a href="{% url 'about' %}">About</a></li>
 
-          {% if request.user.is_authenticated %}
-            <li><a href="{% url 'album_create' %}">Add Album</a></li>
+            {% if request.user.is_authenticated %}
+              <li><a href="{% url 'album_create' %}">Add Album</a></li>
 
-            <div class="nav-right">
-              <li><p style="color:#e1e3f2">
-                <i class="ion-android-person"></i>{{ user.username }}</p>
-              </li>
+              <div class="nav-right">
+                <li><p style="color:#e1e3f2">
+                  <i class="ion-android-person"></i>{{ user.username }}</p>
+                </li>
 
-              <li><a href="{% url 'logout' %}">Logout</a></li>
-            </div>
+                <li><a href="{% url 'logout' %}">Logout</a></li>
+              </div>
 
-          {% else %}
-            <div class="nav-right">
-              <li><a href="{% url 'login' %}"><i class="ion-android-unlock"></i>Login</a></li>
-            </div>
-          {% endif %}
-
-        </ul>
+            {% else %}
+              <div class="nav-right">
+                <li><a href="{% url 'login' %}"><i class="ion-android-unlock"></i>Login</a></li>
+              </div>
+            {% endif %}
+          </ul>
+          <a class="mobile-nav-icon js--nav-icon"><i class="ion-navicon-round"></i></a>
+        </div>
       </nav>
     </header>
 

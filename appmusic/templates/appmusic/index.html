@@ -1,4 +1,5 @@
 {% extends 'appmusic/base.html' %}
+{% load static %}
 {% block title_block %}SoundSurf{% endblock %}
 
 {% block body_block %}
@@ -7,26 +8,26 @@
   <div class="background">
     <div class="header-text">
       <h1>Soundsurf</h1>
-      <p style="margin-bottom: 15px; letter-spacing:4px;">Where Music meets the ocean</p>
+      <p>Where Music meets the ocean</p>
       <form action="{% url 'index' %}" method="GET">
         <input type="text" name="q" {% if request.GET.q %} value="{{ request.GET.q }}" {% endif %} placeholder="Search">
         <input type="submit" class="btn-light" value="Submit">
       </form>
 
-      <a href="#" class="btn btn-light" style="margin-right: 2px;">More</a>
+      <a href="#" class="btn btn-light">More</a>
       <a href="#" class="btn btn-light">Sign Up</a>
     </div>
   </div>
 
   <!-- Top Albums Section -->
   {% if albums %}
-  <section>
+  <section class="js--section-about">
     <div class="container clearfix">
-      {% if is_search %}<h2 style="text-align:center">Albums Found</h2> {% endif %}
+      {% if is_search %}<h2>Albums Found</h2> {% endif %}
 
       {% for album in albums %}
       <div class="card">
-        <img src="{{ album.cover_pic.url }}"style="width:100%; height:60%;" alt="Album Cover">
+        <img src="{{ album.cover_pic.url }}" alt="Album Cover">
         <div class="card-text">
           <h4>{{ album.album_name }}</h4>
           <p>{{ album.album_artist }}</p>
@@ -41,34 +42,11 @@
   </section>
   {% endif %}
 
-
-  {% if not is_search %}
-
-    <section class="section-2 clearfix">
-      <div class="partation area-1">
-        <!-- <p class="content-para">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p> -->
-      </div>
-      <div class="partation area-2">
-        <h2>About</h2>
-        <p class="content-para">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
-        <ul>
-          <li>How to win friends and influence people</li>
-          <li>How to win friends and influence people</li>
-          <li>How to win friends and influence people</li>
-          <li>How to win friends and influence people</li>
-          <li>How to win friends and influence people</li>
-        </ul>
-      </div>
-    </section>
-
-    {% endif %}
-
-    <!-- Top Songs Section -->
-      {% if songs_list %}
+  <!-- Top Songs Section -->
+    {% if songs_list %}
       <section class="section-table" style="background-color: #f7f7f7;">
         <div class="container">
-          <h2 style="text-align:center">{% if is_search %}Songs Found{% else %}Top Songs{% endif %}</h2>
+          <h2>{% if is_search %}Songs Found{% else %}Top Songs{% endif %}</h2>
           <table>
             <thead>
               <tr>
@@ -84,7 +62,7 @@
                   <td>{{ song_obj.song_title }}</td>
                   <td>{{ song_obj.album.album_artist }}</td>
                   <td>
-                    <a href="#"><img src="{{ song_obj.album.cover_pic.url }}" style="width: 20px; max-height: 15px; margin-right: 5px;" /></a>
+                    <a href="#"><img class="album-song-pic" src="{{ song_obj.album.cover_pic.url }}" /></a>
                     <a href="{% url 'album_detail' album_id=song_obj.album.pk %}">{{ song_obj.album.album_name }}</a>
                   </td>
                   <td><a href="{{ song_obj.song.url }}" class="btn btn-success">Play</a></td>
@@ -94,14 +72,56 @@
           </table>
         </div>
       </section>
-      {% endif %}
+    {% endif %}
 
-    {% if not is_search %}
+
+  {% if not is_search %}
+
+    <section class="section-2 clearfix">
+      <div class="partation area-1">
+        <div class="join-site">
+          <h2>About</h2>
+          <p class="content-para">
+            SoundSurf is an online music streaming website which allows you to curate your own music & listen to multiple songs for free.
+            SoundSurf is a Full Stack, responsive website developed by Naman Joshi using Django web framework. Thanks for visiting.
+          </p>
+          <div class="work-steps">
+            <div>1</div>
+            <p>Get access to every new song released and top chart albums</p>
+          </div>
+          <div class="work-steps">
+            <div>2</div>
+            <p>Stream unlimited music for free & follow your favourite artists</p>
+          </div>
+          <div class="work-steps">
+            <div>3</div>
+            <p>Sign up to create your own albums, add curate your own music</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="partation area-2">
+        <div class="join-site">
+          <blockquote>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.
+          </blockquote>
+          <cite><img src="{% static 'css/pics/evans.jpg' %}" alt="Steve Rogers">Steve Rogers - Captain America</cite>
+
+          <blockquote>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.
+          </blockquote>
+          <cite><img src="{% static 'css/pics/bale.jpg' %}" alt="Bruce Wayne">Bruce Wayne - Chairman, Wayne Enterprises</cite>
+
+          <a href="#" class="btn btn-light">Sign Up</a>
+        </div>
+      </div>
+
+    </section>
 
     <section class="section-4 container">
       <p class="content-para">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
       <p class="content-para">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-      <p class="content-para">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
     </section>
   {% endif %}
+
 {% endblock %}

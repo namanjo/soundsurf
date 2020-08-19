@@ -26,7 +26,7 @@ def index(request):
         context = {'albums': albums, 'songs_list': songs, 'is_search': is_search}
         return render(request, 'appmusic/index.html', context)
 
-    albums = Album.objects.order_by('album_name')[:8]
+    albums = Album.objects.all()[:12]
     songs = Songs.objects.all()[:10]
     context = {'albums': albums, 'songs_list': songs, 'is_search':is_search}
     return render(request, 'appmusic/index.html', context)
@@ -113,7 +113,7 @@ def song_delete(request, song_id):
 def login_view(request):
     if request.user.is_authenticated:
         return redirect('index')
-        
+
     else:
         if request.method == "POST":
             username = request.POST.get('username')

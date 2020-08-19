@@ -7,10 +7,10 @@
   <section class="container clearfix">
 
     {% if its_type == 'albums' %}
-        <h2 style="text-align:center">All Albums</h2>
+        <h2>All Albums</h2>
         {% for album in albums %}
         <div class="card">
-          <img src="{{ album.cover_pic.url }}"style="width:100%; height:60%;" alt="Album Cover">
+          <img src="{{ album.cover_pic.url }}" alt="Album Cover">
           <div class="card-text">
             <h4>{{ album.album_name }}</h4>
             <p>{{ album.album_artist }}</p>
@@ -23,7 +23,7 @@
     {% endfor %}
 
     {% elif its_type == 'songs' %}
-      <h2 style="text-align:center">Top Songs</h2>
+      <h2>Top Songs</h2>
       <table>
         <thead>
           <tr>
@@ -39,7 +39,7 @@
               <td>{{ song_obj.song_title }}</td>
               <td>{{ song_obj.album.album_artist }}</td>
               <td>
-                <a href="#"><img src="{{ song_obj.album.cover_pic.url }}" style="width: 20px; max-height: 15px; margin-right: 5px;" /></a>
+                <a href="#"><img src="{{ song_obj.album.cover_pic.url }}" class="album-song-pic" /></a>
                 <a href="{% url 'album_detail' album_id=song_obj.album.pk %}">{{ song_obj.album.album_name }}</a>
               </td>
               <td><a href="{{ song_obj.song.url }}" class="btn btn-success">Play</a></td>
