@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{% static 'icons/ionicons.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/bootstrap-grid.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/queries.css' %}">
     <link href="https://fonts.googleapis.com/css?family=Barlow+Condensed|Lato:100,300,300i,400&display=swap" rel="stylesheet">
   </head>
   <body>
@@ -26,10 +27,7 @@
               <li><a href="{% url 'album_create' %}">Add Album</a></li>
 
               <div class="nav-right">
-                <li><p style="color:#e1e3f2">
-                  <i class="ion-android-person"></i>{{ user.username }}</p>
-                </li>
-
+                <li><a href="{% url 'index' %}"><i class="ion-android-person"></i>{{ user.username }}</a></li>
                 <li><a href="{% url 'logout' %}">Logout</a></li>
               </div>
 
@@ -73,6 +71,8 @@
       </div>
     </footer>
 
-
+    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
   </body>
 </html>

@@ -4,7 +4,7 @@
 
 {% block body_block %}
 
-  <section class="container clearfix">
+  <section class="section-table container clearfix">
 
     {% if its_type == 'albums' %}
         <h2>All Albums</h2>
@@ -23,7 +23,7 @@
     {% endfor %}
 
     {% elif its_type == 'songs' %}
-      <h2>Top Songs</h2>
+      <h2>All Songs</h2>
       <table>
         <thead>
           <tr>

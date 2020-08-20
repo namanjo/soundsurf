@@ -429,6 +429,10 @@ td{
 
 /******Login & Signup Forms******/
 
+.section-form{
+  height: 80vh;
+}
+
 .contact-form{
   width: 100%;
 }
@@ -470,13 +474,13 @@ footer{
   font-size: 80%;
 }
 
-.push{
-  padding: 30px;
-}
-
 .wrapper{
   min-height: 100%;
   margin: 0 auto -30px;
+}
+
+.push{
+  padding: 30px;
 }
 
 .footer-nav{
