@@ -98,17 +98,21 @@
   cite img{height: 40px;}
 
   .main-nav{
-    float: left;
     display: none;
+    margin-left: 5px;
     }
-
-  .nav-right{float: none;}
 
   .mobile-nav-icon{
     display: inline-block;
-    float: right;
     margin: .4em .2em .4em 0;
   }
+
+  #logo{float: none;}
+
+  .nav-left{float: none;}
+  .nav-right{float: none;}
+
+  .nav-wrapper{float: left;}
 
   .main-nav li{display: block;}
 

@@ -112,15 +112,11 @@ nav{
   margin-right: 7px;
 }
 
-.thug-life{
-  float: left;
-}
-
 .nav-right{
   float: right;
 }
 
-.main-nav{
+.main-nav ul{
   list-style: none;
 }
 
@@ -135,17 +131,36 @@ a{
 
 .main-nav li a:link,
 .main-nav li a:visited{
-  color: #e1e3f2;
-  font-size: 1.2em;
+  color: #c4c8c5;
+  font-size: 1em;
   display: block;
-  padding: .7em;
+  padding: .9em .7em;
   transition: all .3s;
 }
 
 .main-nav li a:hover,
 .main-nav li a:active{
-  background: #f1f1f1;
-  color: #000;
+  color: #fff;
+}
+
+#logo{
+  color: #fff;
+  display: inline-block;
+  text-decoration: none;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 400;
+  font-size: 1.5em;
+  float: left;
+  margin: 0 1em 0 0;
+  padding: .4em;
+}
+
+.nav-left{
+  float: left;
+}
+
+.nav-right{
+  float: right;
 }
 
 /*******Sticky Navigation********/

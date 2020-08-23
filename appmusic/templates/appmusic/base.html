@@ -15,29 +15,34 @@
 
     <div class="wrapper">
     <header>
-      <nav>
-        <div class="container clearfix">
-          <ul class="main-nav js--main-nav">
-            <li><a href="{% url 'index' %}">SoundSurf</a></li>
-            <li><a href="{% url 'all_albums_songs' 'albums' %}">Albums</a></li>
-            <li><a href="{% url 'all_albums_songs' 'songs' %}">Songs</a></li>
-            <li><a href="{% url 'about' %}">About</a></li>
+      <nav class="clearfix">
+        <div class="container">
 
-            {% if request.user.is_authenticated %}
-              <li><a href="{% url 'album_create' %}">Add Album</a></li>
+          <div class="nav-wrapper">
+            <a href="{% url 'index' %}" id="logo">SoundSurf</a>
+            <ul class="nav-left main-nav js--main-nav">
+              <li><a href="{% url 'all_albums_songs' 'albums' %}">Albums</a></li>
+              <li><a href="{% url 'all_albums_songs' 'songs' %}">Songs</a></li>
+              <li><a href="{% url 'about' %}">About</a></li>
 
-              <div class="nav-right">
-                <li><a href="{% url 'index' %}"><i class="ion-android-person"></i>{{ user.username }}</a></li>
-                <li><a href="{% url 'logout' %}">Logout</a></li>
-              </div>
+              {% if request.user.is_authenticated %}
+                <li><a href="{% url 'album_create' %}">Add Album</a></li>
+              {% endif %}
+            </ul>
 
-            {% else %}
-              <div class="nav-right">
+            <ul class="nav-right main-nav js--main-nav">
+              {% if request.user.is_authenticated %}
+
+              <li><a href="{% url 'index' %}"><i class="ion-android-person"></i>{{ user.username }}</a></li>
+              <li><a href="{% url 'logout' %}">Logout</a></li>
+              {% else %}
                 <li><a href="{% url 'login' %}"><i class="ion-android-unlock"></i>Login</a></li>
-              </div>
-            {% endif %}
-          </ul>
+              {% endif %}
+            </ul>
+
+          </div>
           <a class="mobile-nav-icon js--nav-icon"><i class="ion-navicon-round"></i></a>
+
         </div>
       </nav>
     </header>
