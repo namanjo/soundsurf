@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import Http404
 from appmusic.models import Album, Songs
-from appmusic.forms import AlbumForm, AddSongForm
+from appmusic.forms import AlbumForm, AddSongForm, UserForm
 from django.db.models import Q
 
 from django.contrib.auth.decorators import login_required
@@ -48,9 +48,14 @@ def all_albums_songs(request, its_type):
     else:
         raise Http404
 
+@login_required
+def my_albums(request):
+    albums = Album.objects.filter(author=request.user)
+    return render(request, 'appmusic/my_albums.html', {'albums':albums})
 
-def detail(request, album_id):
-    album = get_object_or_404(Album, pk=album_id)
+
+def detail(request, album_slug):
+    album = get_object_or_404(Album, slug=album_slug)
     return render(request, 'appmusic/detail.html', {'album': album})
 
 
@@ -64,15 +69,15 @@ def album_create(request):
             album.author = request.user
             album.cover_pic = request.FILES['cover_pic']
             album.save()
-            return redirect('album_detail', album_id = album.pk)
+            return redirect('album_detail', album_slug = album.slug)
     else:
         form = AlbumForm()
     return render(request, 'appmusic/create_album.html', {'form': form})
 
 
 @login_required
-def add_song(request, album_id):
-    album = get_object_or_404(Album, pk=album_id)
+def add_song(request, album_slug):
+    album = get_object_or_404(Album, slug=album_slug)
     FILE_TYPE = ['mp3', 'wav']
 
     if request.method == "POST":
@@ -89,15 +94,15 @@ def add_song(request, album_id):
                 return render(request, 'appmusic/add_song.html', context)
 
             song_obj.save()
-            return redirect('album_detail', album_id=album_id)
+            return redirect('album_detail', album_slug=album_slug)
     else:
         form = AddSongForm()
     return render(request, 'appmusic/add_song.html', {'form': form})
 
 
 @login_required
-def album_delete(request, album_id):
-    album = get_object_or_404(Album, pk=album_id)
+def album_delete(request, album_slug):
+    album = get_object_or_404(Album, album_slug=album_slug)
     album.delete()
     return redirect('index')
 
@@ -105,9 +110,33 @@ def album_delete(request, album_id):
 @login_required
 def song_delete(request, song_id):
     song = get_object_or_404(Songs, pk=song_id)
-    album_id = song.album.id
+    album_slug = song.album.slug
     song.delete()
-    return redirect('album_detail', album_id=album_id)
+    return redirect('album_detail', album_slug=album_slug)
+
+
+def register(request):
+    if request.user.is_authenticated:
+        return redirect('index')
+
+    else:
+        if request.method == 'POST':
+            user_form = UserForm(request.POST)
+
+            if user_form.is_valid():
+                user = user_form.save(commit=False)
+                user.set_password(user.password)
+                user.save()
+
+                username = user_form.cleaned_date.get('username')
+                password = user_form.cleaned_data.get('password')
+                user_login = authenticate(username = username, password=password)
+                login(request, user_login)
+                return redirect('index')
+
+        else:
+            user_form = UserForm()
+        return render(request, 'appmusic/registration.html', {'form': user_form,})
 
 
 def login_view(request):

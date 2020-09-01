@@ -1,26 +1,16 @@
 {% extends 'appmusic/base.html' %}
 
-{% block title_block %}AlbumDetail{% endblock %}
+{% block title_block %}All Items{% endblock %}
 
 {% block body_block %}
 
   <section class="section-table container clearfix">
 
     {% if its_type == 'albums' %}
-        <h2>All Albums</h2>
-        {% for album in albums %}
-        <div class="card">
-          <img src="{{ album.cover_pic.url }}" alt="Album Cover">
-          <div class="card-text">
-            <h4>{{ album.album_name }}</h4>
-            <p>{{ album.album_artist }}</p>
-            <a href="{% url 'album_detail' album_id=album.pk %}" class="btn btn-primary">Details</a>
-            {% if user.is_authenticated %}
-              <a href="{% url 'album_delete' album_id=album.pk %}" class="btn btn-dark"><i class="ion-ios-trash"></i></a>
-            {% endif %}
-          </div>
-        </div>
-    {% endfor %}
+
+      <h2>All Albums</h2>
+      {% include 'appmusic/all_albums_template.html' %}
+      <div style="text-align:center"><a href="{% url 'all_albums_songs' 'songs' %}" class="btn btn-dark more-albums-btn">View Songs</a></div>
 
     {% elif its_type == 'songs' %}
       <h2>All Songs</h2>
@@ -40,15 +30,17 @@
               <td>{{ song_obj.album.album_artist }}</td>
               <td>
                 <a href="#"><img src="{{ song_obj.album.cover_pic.url }}" class="album-song-pic" /></a>
-                <a href="{% url 'album_detail' album_id=song_obj.album.pk %}">{{ song_obj.album.album_name }}</a>
+                <a href="{% url 'album_detail' album_slug=song_obj.album.slug %}">{{ song_obj.album.album_name }}</a>
               </td>
-              <td><a href="{{ song_obj.song.url }}" class="btn btn-success">Play</a></td>
+              <td><a href="{{ song_obj.song.url }}" class="btn btn-success"><i class="ion-play"></i></a></td>
             </tr>
           {% endfor %}
         </tbody>
       </table>
-      {% endif %}
 
+      <div style="text-align:center"><a href="{% url 'all_albums_songs' 'albums' %}" class="btn btn-dark more-albums-btn">View Albums</a></div>
+
+      {% endif %}
   </section>
 
 {% endblock %}

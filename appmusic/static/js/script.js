@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
   /*For Sticky Navigation*/
-  $('.js--section-about').waypoint(function(direction){
+  $('.js--section-albums').waypoint(function(direction){
     if (direction == 'down') {
       $('nav').addClass('sticky');
     } else {
@@ -11,7 +11,17 @@ $(document).ready(function() {
     offset: '60px;'
   });
 
+  /*Scroll on buttons*/
+  $('.js-scroll-to-about').click(function(){
+    $('html, body').animate({scrollTop: $('.section-about').offset().top-100},1000);
+  });
 
+  $('.js-scroll-to-songs').click(function(){
+    $('html, body').animate({scrollTop: $('.js--section-songs').offset().top-100},700);
+  });
+
+
+  /*For Hamburger Icon Toggler*/
   $('.js--nav-icon').click(function() {
     var nav = $('.js--main-nav');
     var icon = $('.js--nav-icon i');

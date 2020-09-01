@@ -1,0 +1,14 @@
+{% extends 'appmusic/base.html' %}
+
+{% block title_block %}My Albums{% endblock %}
+
+{% block body_block %}
+
+  <section class="section-table container clearfix">
+
+    <h2>{{ request.user.username }} 's Albums</h2>
+    {% include 'appmusic/all_albums_template.html' %}
+
+  </section>
+
+{% endblock %}

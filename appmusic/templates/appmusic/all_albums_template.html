@@ -1,0 +1,13 @@
+{% for album in albums %}
+  <div class="card">
+    <img src="{{ album.cover_pic.url }}" alt="Album Cover">
+    <div class="card-text">
+      <h4>{{ album.album_name }}</h4>
+      <p>{{ album.album_artist }}</p>
+      <a href="{% url 'album_detail' album_slug=album.slug %}" class="btn btn-primary">View</a>
+      {% if request.user == album.author %}
+        <a href="{% url 'album_delete' album_slug=album.slug %}" class="btn btn-dark"><i class="ion-ios-trash"></i></a>
+      {% endif %}
+    </div>
+  </div>
+{% endfor %}

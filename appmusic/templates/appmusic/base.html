@@ -21,22 +21,21 @@
           <div class="nav-wrapper">
             <a href="{% url 'index' %}" id="logo">SoundSurf</a>
             <ul class="nav-left main-nav js--main-nav">
-              <li><a href="{% url 'all_albums_songs' 'albums' %}">Albums</a></li>
+              <li><a href="{% url 'my_albums' %}">My Albums<i class="ion-disc"></i></a></li>
               <li><a href="{% url 'all_albums_songs' 'songs' %}">Songs</a></li>
               <li><a href="{% url 'about' %}">About</a></li>
 
               {% if request.user.is_authenticated %}
-                <li><a href="{% url 'album_create' %}">Add Album</a></li>
+                <li><a href="{% url 'album_create' %}">Add Album<i class="ion-plus-round"></i></a></li>
               {% endif %}
             </ul>
 
             <ul class="nav-right main-nav js--main-nav">
               {% if request.user.is_authenticated %}
-
-              <li><a href="{% url 'index' %}"><i class="ion-android-person"></i>{{ user.username }}</a></li>
+              <li><a href="{% url 'index' %}">{{ user.username }}<i class="ion-android-person"></i></a></li>
               <li><a href="{% url 'logout' %}">Logout</a></li>
               {% else %}
-                <li><a href="{% url 'login' %}"><i class="ion-android-unlock"></i>Login</a></li>
+                <li><a href="{% url 'login' %}">Login<i class="ion-android-unlock"></i></a></li>
               {% endif %}
             </ul>
 
@@ -64,15 +63,15 @@
 
 
           <ul class="social-links clearfix">
-            <li><a href="#"><i class="ion-social-facebook"></i></a></li>
+            <li><a href="#"><i class="ion-social-linkedin"></i></a></li>
             <li><a href="#"><i class="ion-social-twitter"></i></a></li>
-            <li><a href="#"><i class="ion-social-googleplus"></i></a></li>
+            <li><a href="#"><i class="ion-social-facebook"></i></a></li>
             <li><a href="#"><i class="ion-social-instagram"></i></a></li>
           </ul>
       </div>
 
       <div class="container">
-        <p>Copyright &copy; 2020 by SoundSurf. All rights reserved.</p>
+        <p>Copyright &copy; 2020 by Naman Joshi. All rights reserved.</p>
       </div>
     </footer>
 

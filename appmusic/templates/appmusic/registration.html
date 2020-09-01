@@ -1,0 +1,46 @@
+{% extends 'appmusic/base.html' %}
+
+{% block title_block %}Registration{% endblock %}
+
+{% block body_block %}
+
+  <section class="section-form container">
+    <h2 style="text-align:left;">Sign Up</h2>
+      <form class="contact-form panel" method="POST">
+        {% csrf_token %}
+
+        {% include 'appmusic/form_template.html' %}
+
+        {% if form.non_field_errors %}
+          <div class="row">
+            <div class="col-sm-4">
+              <label>&nbsp</label>
+            </div>
+            <div class="col-sm-8">
+              <span>{{ form.non_field_errors }}</span>
+            </div>
+          </div>
+        {% endif %}
+
+        <div class="row">
+          <div class="col-sm-4">
+            <label class="lable-disable">&nbsp</label>
+          </div>
+          <div class="col-sm-8">
+            <input type="submit" value="Submit">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-4">
+            <label class="lable-disable">&nbsp</label>
+          </div>
+          <div class="col-sm-8">
+            <p style="margin-top:.5em; font-size:16px">Already have an accout? <a href="{% url 'login' %}">Login Here<a></p>
+          </div>
+        </div>
+
+      </form>
+  </section>
+
+{% endblock %}

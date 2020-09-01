@@ -14,70 +14,61 @@
         <input type="submit" class="btn-light" value="Submit">
       </form>
 
-      <a href="#" class="btn btn-light">More</a>
-      <a href="#" class="btn btn-light">Sign Up</a>
+      <a class="btn btn-light js-scroll-to-songs">Explore</a>
+      <a class="btn btn-light js-scroll-to-about">More</a>
     </div>
   </div>
 
   <!-- Top Albums Section -->
   {% if albums %}
-  <section class="js--section-about">
-    <div class="container clearfix">
-      {% if is_search %}<h2>Albums Found</h2> {% endif %}
 
-      {% for album in albums %}
-      <div class="card">
-        <img src="{{ album.cover_pic.url }}" alt="Album Cover">
-        <div class="card-text">
-          <h4>{{ album.album_name }}</h4>
-          <p>{{ album.album_artist }}</p>
-          <a href="{% url 'album_detail' album_id=album.pk %}" class="btn btn-primary">Details</a>
-          {% if request.user == album.author %}
-            <a href="{% url 'album_delete' album_id=album.pk %}" class="btn btn-dark"><i class="ion-ios-trash"></i></a>
-          {% endif %}
-        </div>
+    <section class="js--section-albums">
+      <div class="container clearfix">
+        {% if is_search %}<h2>Albums Found</h2> {% endif %}
+        {% include 'appmusic/all_albums_template.html' %}
       </div>
-      {% endfor %}
-    </div>
-  </section>
+        {% if not is_search %}<div style="text-align:center"><a href="{% url 'all_albums_songs' 'albums' %}" class="btn btn-dark more-albums-btn">More Albums</a></div>{% endif %}
+    </section>
   {% endif %}
 
+  {% if songs_list %}
+
   <!-- Top Songs Section -->
-    {% if songs_list %}
-      <section class="section-table" style="background-color: #f7f7f7;">
-        <div class="container">
-          <h2>{% if is_search %}Songs Found{% else %}Top Songs{% endif %}</h2>
-          <table>
-            <thead>
+    <section class="section-table js--section-songs" style="background-color: #f7f7f7;">
+      <div class="container">
+        <h2>{% if is_search %}Songs Found{% else %}Top Songs{% endif %}</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Song Title</th>
+              <th>Artist</th>
+              <th>Album</th>
+              <th>Song</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for song_obj in songs_list %}
               <tr>
-                <th>Song Title</th>
-                <th>Artist</th>
-                <th>Album</th>
-                <th>Song</th>
+                <td>{{ song_obj.song_title }}</td>
+                <td>{{ song_obj.album.album_artist }}</td>
+                <td>
+                  <a href="#"><img class="album-song-pic" src="{{ song_obj.album.cover_pic.url }}" /></a>
+                  <a href="{% url 'album_detail' album_slug=song_obj.album.slug %}">{{ song_obj.album.album_name }}</a>
+                </td>
+                <td><a href="{{ song_obj.song.url }}" class="btn btn-success"><i class="ion-play"></i></a></td>
               </tr>
-            </thead>
-            <tbody>
-              {% for song_obj in songs_list %}
-                <tr>
-                  <td>{{ song_obj.song_title }}</td>
-                  <td>{{ song_obj.album.album_artist }}</td>
-                  <td>
-                    <a href="#"><img class="album-song-pic" src="{{ song_obj.album.cover_pic.url }}" /></a>
-                    <a href="{% url 'album_detail' album_id=song_obj.album.pk %}">{{ song_obj.album.album_name }}</a>
-                  </td>
-                  <td><a href="{{ song_obj.song.url }}" class="btn btn-success">Play</a></td>
-                </tr>
-              {% endfor %}
-            </tbody>
-          </table>
-        </div>
-      </section>
-    {% endif %}
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% if not is_search %}<div style="text-align:center"><a href="{% url 'all_albums_songs' 'songs' %}" class="btn btn-dark more-albums-btn">More Songs</a></div>{% endif %}
+    </section>
+  {% endif %}
 
 
   {% if not is_search %}
 
-    <section class="section-2 clearfix">
+    <section class="section-about clearfix">
       <div class="partation area-1">
         <div class="join-site">
           <h2>About</h2>
@@ -112,7 +103,7 @@
           </blockquote>
           <cite><img src="{% static 'css/pics/bale.jpg' %}" alt="Bruce Wayne">Bruce Wayne - Chairman, Wayne Enterprises</cite>
 
-          <a href="#" class="btn btn-light">Sign Up</a>
+          <a href="{% url 'register' %}" class="btn btn-light">Sign Up</a>
         </div>
       </div>
 
