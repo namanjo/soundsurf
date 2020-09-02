@@ -351,6 +351,9 @@ input[type=file]{
   min-height: 40vh;
 }
 
+.my-albums{
+  min-height: 80vh;
+}
 
 /******Section About******/
 .section-about{

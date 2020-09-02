@@ -4,11 +4,15 @@
 
 {% block body_block %}
 
-  <section class="section-table container clearfix">
+  <section class="my-albums container clearfix">
 
     <h2>{{ request.user.username }} 's Albums</h2>
-    {% include 'appmusic/all_albums_template.html' %}
 
+    {% if albums %}
+      {% include 'appmusic/all_albums_template.html' %}
+    {% else %}
+      <h2 style="font-size:16px">No albums created yet</h2>
+    {% endif %}
   </section>
 
 {% endblock %}

@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 class AlbumForm(forms.ModelForm):
     class Meta():
         model = Album
-        exclude = ['author']
+        exclude = ['author', 'slug']
 
 
 class AddSongForm(forms.ModelForm):

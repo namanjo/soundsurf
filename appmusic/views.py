@@ -128,7 +128,7 @@ def register(request):
                 user.set_password(user.password)
                 user.save()
 
-                username = user_form.cleaned_date.get('username')
+                username = user_form.cleaned_data.get('username')
                 password = user_form.cleaned_data.get('password')
                 user_login = authenticate(username = username, password=password)
                 login(request, user_login)
