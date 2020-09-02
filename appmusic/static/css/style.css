@@ -1,6 +1,7 @@
 *{
   margin: 0;
   padding: 0;
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
 
@@ -68,6 +69,7 @@ h3{
 /******Header Section******/
 .background{
   position: relative;
+  background-image: -webkit-gradient(linear,left top, left bottom,from(rgba(0, 0, 0, 0.3)),to(rgba(0, 0, 0, 0.3))),url(pics/music.jpg);
   background-image: linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.3)),url(pics/music.jpg);
   height: 60vh;
   background-size: cover;
@@ -80,6 +82,7 @@ h3{
   width: 1120px;
   top: 50%;
   left: 50%;
+  -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   color: #fff;
 }
@@ -132,6 +135,7 @@ nav{
   font-size: 1em;
   display: block;
   padding: .9em .6em;
+  -webkit-transition: all .3s;
   transition: all .3s;
 }
 
@@ -167,6 +171,7 @@ nav{
   left: 0;
   width: 100%;
   background-color: rgba(32, 32, 32, 0.96);
+  -webkit-box-shadow: 0 2px 2px #555;
   box-shadow: 0 2px 2px #555;
   z-index: 9999;
 }
@@ -228,6 +233,7 @@ input[type=file]{
   border-color: #fff;
   cursor: pointer;
   outline: 0;
+  -webkit-transition: background-color .3s;
   transition: background-color .3s;
 }
 
@@ -238,6 +244,7 @@ input[type=file]{
   text-decoration: none;
   padding: 0.35em 0.7em;
   border-radius: .5em;
+  -webkit-transition: background-color .3s;
   transition: background-color .3s;
 }
 
@@ -270,6 +277,7 @@ input[type=file]{
 }
 
 .btn-success:focus, .btn-success.focus {
+  -webkit-box-shadow: 0 0 0 0.2rem rgba(72, 180, 97, 0.5);
   box-shadow: 0 0 0 0.2rem rgba(72, 180, 97, 0.5);
 }
 
@@ -309,6 +317,7 @@ input[type=file]{
 
 /*****Cards*****/
 .card{
+  -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.6);
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.6);
   background: #f1f1f1;
   float: left;
@@ -394,6 +403,7 @@ input[type=file]{
 }
 
 .area-2{
+  background-image: -webkit-gradient(linear,left top, left bottom,from(rgba(0, 0, 0, 0.6)),to(rgba(0, 0, 0, 0.6))),url(pics/stage_show.jpg);
   background-image: linear-gradient(rgba(0, 0, 0, 0.6),rgba(0, 0, 0, 0.6)),url(pics/stage_show.jpg);
   background-size: cover;
   background-position: center;
@@ -404,6 +414,7 @@ input[type=file]{
 .join-site{
   position: absolute;
   top: 50%;
+  -webkit-transform: translateY(-50%);
   transform: translateY(-50%);
   padding: 1em 2em;
 }
@@ -494,6 +505,7 @@ td{
   font-weight: 300;
   cursor: pointer;
   outline: 0;
+  -webkit-transition: background-color .3s;
   transition: background-color .3s;
 }
 
@@ -547,6 +559,7 @@ footer{
   text-decoration: none;
   border: 0;
   color:#888;
+  -webkit-transition: color 0.2s;
   transition: color 0.2s;
 }
 
